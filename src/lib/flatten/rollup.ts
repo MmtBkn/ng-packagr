@@ -9,6 +9,7 @@ import { ExternalModuleIdStrategy, DependencyList } from './external-module-id-s
 import { umdModuleIdStrategy } from './umd-module-id-strategy';
 import { TransformHook } from 'rollup';
 import { outputFile, outputJson } from 'fs-extra';
+import inline from 'rollup-plugin-inline-js';
 
 /**
  * Options used in `ng-packagr` for writing flat bundle files.
@@ -39,7 +40,7 @@ export async function rollupBundleFile(opts: RollupOptions): Promise<void[]> {
     external: moduleId => externalModuleIdStrategy.isExternalDependency(moduleId),
     inlineDynamicImports: false,
     input: opts.entry,
-    plugins: [rollupJson(), nodeResolve(), commonJs(), sourcemaps(), { transform: opts.transform }],
+    plugins: [rollupJson(), nodeResolve(), commonJs(), sourcemaps(), inline(), { transform: opts.transform }],
     onwarn: warning => {
       if (typeof warning === 'string') {
         log.warn(warning);
