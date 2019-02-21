@@ -115,7 +115,7 @@
     "typescript": "~3.2.2",
     "zone.js": "^0.8.26"
   },
-  "private": true,
+  "private": false,
   "scripts": {
     "prebuild": "rimraf dist && yarn schema",
     "build": "tsc -p src/tsconfig.packagr.json",
