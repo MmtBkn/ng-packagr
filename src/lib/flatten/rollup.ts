@@ -38,7 +38,7 @@ export async function rollupBundleFile(opts: RollupOptions): Promise<void[]> {
   const bundle = await rollup.rollup({
     context: 'this',
     external: moduleId => externalModuleIdStrategy.isExternalDependency(moduleId),
-    inlineDynamicImports: false,
+    inlineDynamicImports: true,
     input: opts.entry,
     plugins: [rollupJson(), nodeResolve(), commonJs(), sourcemaps(), inline(), { transform: opts.transform }],
     onwarn: warning => {
